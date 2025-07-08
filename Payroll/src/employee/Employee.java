@@ -14,7 +14,7 @@ public abstract class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return getClass().getSimpleName() +  "Employee{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", socialSecurityNumber=" + socialSecurityNumber +

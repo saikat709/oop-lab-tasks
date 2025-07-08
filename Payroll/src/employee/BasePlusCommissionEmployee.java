@@ -14,8 +14,13 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
     }
 
     @Override
+    public double earnings() {
+        return baseSalary + super.earnings();
+    }
+
+    @Override
     public String toString() {
-        return "SalariedEmployee" +
+        return "BasePlusCommissionEmployee{" +
                 "firstName='" + this.getFirstName() + '\'' +
                 ", lastName='" + this.getLastName() + '\'' +
                 ", socialSecurityNumber=" + this.getSocialSecurityNumber() +
