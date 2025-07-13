@@ -4,3 +4,15 @@ Email Address: WODIJH
 Address : 31p0ru9
 Gender : male
 ---------------------------------------------
+Full Name: Saikat
+Phone Number: 2091030919
+Email Address: saikatislam709@gmail.com
+Address : Dhaka, Bangladesh
+Gender : male
+Date of Birth: 2024-02-19
+Latest Degree: BSc
+Picture path: /home/saikat/Pictures/Camera/Photo from 2025-04-21 15-36-25.411928.jpeg
+Preferred playing position: Midfielder
+Inter department participation: true
+Experience : Feels interesting.
+---------------------------------------

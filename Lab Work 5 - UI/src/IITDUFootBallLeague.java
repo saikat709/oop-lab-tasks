@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class IITDUFootBallLeague {
@@ -14,6 +13,8 @@ public class IITDUFootBallLeague {
     private JComboBox<String> preferredPosition;
     private JCheckBox playedInterDept;
     private JTextArea experience;
+    private JTextField dateInput;
+    private String filepath;
 
 
     public void collectInfo() {
@@ -32,7 +33,6 @@ public class IITDUFootBallLeague {
         gridBag.gridx = 0;
         gridBag.gridy = 0;
 
-        // Personal Info
         formPanel.add(new JLabel("Full Name:"), gridBag);
         gridBag.gridx = 1;
         nameInput = new JTextField(20);
@@ -72,6 +72,7 @@ public class IITDUFootBallLeague {
         genderGroup.add(male);
         genderGroup.add(female);
         genderGroup.add(other);
+
         genderPanel.add(male);
         genderPanel.add(female);
         genderPanel.add(other);
@@ -81,19 +82,13 @@ public class IITDUFootBallLeague {
         gridBag.gridx = 0; gridBag.gridy++;
         formPanel.add(new JLabel("Date of Birth:"), gridBag);
         gridBag.gridx = 1;
-        JTextField dateInout = new JTextField("YYYY-MM-DD", 20);
-        dateInout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Date: " + dateInout.getText());
-            }
-        });
-        formPanel.add(dateInout, gridBag);
+        dateInput = new JTextField("YYYY-MM-DD", 20);
+        formPanel.add(dateInput, gridBag);
 
         gridBag.gridx = 0; gridBag.gridy++;
         formPanel.add(new JLabel("Latest Degree:"), gridBag);
         gridBag.gridx = 1;
-        latestDegree = new JComboBox<>(new String[]{"BSc", "MSc", "PhD"});
+        latestDegree = new JComboBox<>(new String[]{"BSSE", "MSSE"});
         formPanel.add(latestDegree, gridBag);
 
         gridBag.gridx = 0; gridBag.gridy++;
@@ -120,48 +115,42 @@ public class IITDUFootBallLeague {
         experience = new JTextArea(4, 20);
         formPanel.add(new JScrollPane(experience), gridBag);
 
-        // Submit Button
         gridBag.gridx = 0;
         gridBag.gridy++;
         gridBag.gridwidth = 2;
         gridBag.anchor = GridBagConstraints.CENTER;
         JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleSubmitClick();
-            }
-        });
+        submitButton.addActionListener(this::handleSubmitClick);
         formPanel.add(submitButton, gridBag);
 
         frame.add(formPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
-    private void handleSubmitClick() {
-        RegistrationFileHandler rg = new RegistrationFileHandler();
-        System.out.println("Gender: " + genderGroup.getSelection().getActionCommand() );
-        rg.appendToFile(getFormInfoAsString());
-        rg.printFileInfo();
+    private void handleSubmitClick(ActionEvent actionEvent) {
+        if ( isFormCompletedProperly() ) {
+            RegistrationFileHandler rg = new RegistrationFileHandler();
+            rg.appendToFile(getFormInfoAsString());
+            rg.printFileInfo();
+        } else {
+            showAlert("Please fill up all the fields properly.");
+        }
     }
 
-    private static JButton getUploadButton(JFrame frame) {
+    private JButton getUploadButton(JFrame frame) {
         JButton uploadButton = new JButton("Choose File");
-        uploadButton.addActionListener(new  ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = getJFileChooser();
-                fileChooser.setAcceptAllFileFilterUsed(false);
+        uploadButton.addActionListener( e -> {
+            JFileChooser fileChooser = getJFileChooser();
+            fileChooser.setAcceptAllFileFilterUsed(false);
 
-                int option = fileChooser.showOpenDialog(frame);
-                if(option == JFileChooser.APPROVE_OPTION){
-                    File file = fileChooser.getSelectedFile();
-                    System.out.println("File Selected: " + file.getName());
-                }else{
-                    System.out.println("Open command canceled");
-                }
+            int option = fileChooser.showOpenDialog(frame);
+            if(option == JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                System.out.println("File Selected: " + file.getName());
+                filepath = file.getAbsolutePath();
+            } else{
+                System.out.println("Open command canceled");
             }
-
         });
         return uploadButton;
     }
@@ -173,15 +162,16 @@ public class IITDUFootBallLeague {
     }
 
     private boolean isFormCompletedProperly(){
-
         if ( genderGroup.getSelection() == null ) return false;
         if ( nameInput.getText().isEmpty() ) return false;
         if ( phoneNumberInput.getText().isEmpty() ) return false;
         if ( emailAddressInput.getText().isEmpty() ) return false;
         if ( addressInput.getText().isEmpty() ) return false;
+        if ( filepath == null || filepath.isEmpty() ) return false;
         if ( latestDegree.getSelectedItem() == null ) return false;
         if ( preferredPosition.getSelectedItem() == null ) return false;
         if ( experience.getText().isEmpty() ) return false;
+        if ( dateInput.getText().isEmpty() ) return false;
 
         return true;
     }
@@ -192,6 +182,16 @@ public class IITDUFootBallLeague {
                 + "Email Address: " + emailAddressInput.getText() + "\n"
                 + "Address : " + addressInput.getText() + "\n"
                 + "Gender : " + genderGroup.getSelection().getActionCommand() + "\n"
+                + "Date of Birth: " + dateInput.getText() + "\n"
+                + "Latest Degree: " + latestDegree.getSelectedItem().toString() + "\n"
+                + "Picture path: " + filepath + "\n"
+                + "Preferred playing position: " + preferredPosition.getSelectedItem().toString() + "\n"
+                + "Inter department participation: " + playedInterDept.isSelected() + "\n"
+                + "Experience : " + experience.getText() + "\n"
                 + "---------------------------------------\n";
+    }
+
+    private void showAlert(String message){
+        JOptionPane.showMessageDialog(null, message);
     }
 }
