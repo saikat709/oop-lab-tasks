@@ -3,7 +3,6 @@ import java.util.*;
 public class StudentManagementSystem {
 
     public static void main(String[] args) {
-        // task 1
         List<Student> students = new ArrayList<>();
         add5Students(students);
         for(Student student : students) {
@@ -14,7 +13,7 @@ public class StudentManagementSystem {
         students.remove(1);
         System.out.println();
 
-        // task 2
+
         Set<Student> oopCourse = new HashSet<>();
         oopCourse.add(students.get(0));
         oopCourse.add(students.get(1));
@@ -31,7 +30,7 @@ public class StudentManagementSystem {
         System.out.println();
 
 
-        // task 3
+
         Map<Integer, Student> studentMap = new HashMap<>();
         for(Student student : students) {
             studentMap.put(student.getStudentId(), student);

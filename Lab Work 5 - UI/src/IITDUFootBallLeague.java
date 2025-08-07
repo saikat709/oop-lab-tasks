@@ -16,9 +16,10 @@ public class IITDUFootBallLeague {
     private JTextField dateInput;
     private String filepath;
 
+    private JFrame frame;
 
     public void collectInfo() {
-        JFrame frame = new JFrame("IIT DU FootBall League");
+        frame = new JFrame("IIT DU FootBall League");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 700);
         frame.setLayout(new BorderLayout());
@@ -192,6 +193,6 @@ public class IITDUFootBallLeague {
     }
 
     private void showAlert(String message){
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(frame, message);
     }
 }

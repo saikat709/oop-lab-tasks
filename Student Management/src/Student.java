@@ -25,11 +25,11 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student[" +
                 "studentId=" + studentId +
                 ", studentName='" + studentName + '\'' +
                 ", major='" + major + '\'' +
-                '}';
+                ']';
     }
 
     @Override
@@ -38,8 +38,6 @@ public class Student {
         Student student = (Student) o;
         return studentId == student.studentId;
     }
-
-
 
     @Override
     public int hashCode() {
