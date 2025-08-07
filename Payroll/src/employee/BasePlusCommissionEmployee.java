@@ -1,7 +1,6 @@
 package employee;
 
 public class BasePlusCommissionEmployee extends CommissionEmployee {
-
     private Double baseSalary;
 
     public BasePlusCommissionEmployee(String firstName, String lastName, Integer socialSecurityNumber) {
