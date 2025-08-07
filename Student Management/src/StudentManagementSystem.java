@@ -9,7 +9,7 @@ public class StudentManagementSystem {
             System.out.println(student);
         }
 
-        students.add(2, new Student(678901, "Eigen", "Biology"));
+        students.add(2, new Student(678901, "Abccccc", "Biology"));
         students.remove(1);
         System.out.println();
 
@@ -18,7 +18,8 @@ public class StudentManagementSystem {
         oopCourse.add(students.get(0));
         oopCourse.add(students.get(1));
         oopCourse.add(students.get(2));
-        oopCourse.add(students.get(0));
+        oopCourse.add(new Student(students.get(0).getStudentId(), "p", "der"));
+
         System.out.println("Number of students in OOP Course: " + oopCourse.size());
         if ( oopCourse.contains(students.get(1)) ) {
             System.out.println("SUCCESS: " + students.get(1) + " is already in OOP Course.");
@@ -38,14 +39,18 @@ public class StudentManagementSystem {
             studentMap.put(student.getStudentId(), student);
         }
         Student std = studentMap.get(678901);
-        System.out.println("From map: " + std);
+        if ( std != null ) {
+            System.out.println("From map: " + std);
+        } else {
+            System.out.println("ERROR: Student not found.");
+        }
     }
 
     public static void add5Students(List<Student> students) {
-        students.add(new Student(123456, "John Smith", "Computer Science"));
-        students.add(new Student(234567, "Emily Johnson", "Mathematics"));
-        students.add(new Student(345678, "Michael Brown", "Physics"));
-        students.add(new Student(456789, "Sarah Davis", "Biology"));
-        students.add(new Student(567890, "David Wilson", "Chemistry"));
+        students.add(new Student(123456, "Saikat", "Computer Science"));
+        students.add(new Student(234567, "Tamim", "Mathematics"));
+        students.add(new Student(345678, "Darun", "Physics"));
+        students.add(new Student(456789, "Abc", "Biology"));
+        students.add(new Student(567890, "Afif", "Chemistry"));
     }
 }
