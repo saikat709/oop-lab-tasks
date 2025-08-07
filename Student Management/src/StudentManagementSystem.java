@@ -21,7 +21,9 @@ public class StudentManagementSystem {
         oopCourse.add(students.get(0));
         System.out.println("Number of students in OOP Course: " + oopCourse.size());
         if ( oopCourse.contains(students.get(1)) ) {
-            System.out.println("INFO: " + students.get(1) + " is already in OOP Course.");
+            System.out.println("SUCCESS: " + students.get(1) + " is already in OOP Course.");
+        } else {
+            System.out.println("ERROR:   " + students.get(1) + " is not in OOP Course.");
         }
 
         for (Student std: oopCourse) {
